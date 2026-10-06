@@ -4,7 +4,8 @@ Functional lab of an Epipe (VLL/VPWS) transported by Segment Routing MPLS with I
 
 Topology:
 
-<img width="1020" height="187" alt="image" src="https://github.com/user-attachments/assets/193449ea-0e37-43e7-a3a8-707693ed30c4" />
+<img width="1271" height="307" alt="image" src="https://github.com/user-attachments/assets/5bf22efe-a18b-4389-bfe1-bfd75c5ac082" />
+
 
 Linear core with two transit nodes (P1, P2) between the PEs. All six nodes are SR-SIM; the CEs are plain SR OS routers at both ends of the Epipe.
 
