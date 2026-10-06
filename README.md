@@ -1,6 +1,6 @@
 # Epipe service (VPWS) with Segment Routing
 
-Functional lab of Segment Routing MPLS with IS-IS on Nokia SR OS. The SR-ISIS underlay transports three service types, built in phases: Epipe (VLL) → VPLS → VPRN. Everything runs in containers with SR-SIM 25.7.R1 and Containerlab, configured in MD-CLI.
+Functional lab of Segment Routing MPLS with IS-IS on Nokia SR OS. The SR-ISIS underlay transports three service types, built in phases: Epipe (VLL) → VPLS → VPRN. Everything runs in containers with SR-SIM 25.7.R1 and Containerlab, configured in MD-CLI/Classic.
 
 Topology:
 
