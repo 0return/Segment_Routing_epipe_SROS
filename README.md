@@ -12,11 +12,23 @@ Linear core with two transit nodes (P1, P2) between the PEs. All six nodes are S
 
                  How it works
 
-IS-IS distributes the SIDs. Each node advertises a Prefix-SID on its system /32, and its SRGB (20000–27999) in the Router Capability TLV. That is why advertise-router-capability is required. The Prefix-SID sub-TLV travels in the extended IP reachability TLV (135), so the IGP runs with wide-metrics-only.
-Global labels. Label = SRGB base + index, so PE2 (index 4) is label 20004 on every node of the domain.
+IS-IS levels. PE1 and PE2 are L1-only; P1 and P2 are L1/L2. All four nodes share area 49.0001, so the L1 LSDB holds every node and its Prefix-SID, and PE1 learns PE2's SID directly in L1. P1 and P2 also form an L2 adjacency between them, but this service does not need it.
 
-SR is the transport. No LDP on the links and no RSVP. SR builds the shortest-path tunnels (show router tunnel-table, protocol isis), and the SDP binds to them with sr-isis true.
+IS-IS distributes the SIDs. Each node advertises a Prefix-SID on its system /32, and its SRGB in the Router Capability TLV. That is why advertise-router-capability is required. The Prefix-SID sub-TLV travels in the extended IP reachability TLV (135), so every level runs with wide-metrics-only.
+
+Global labels. Label = SRGB base + index, so PE2 (index 2) is label 100002 on every node of the domain.
+
+SRGB placement. The SRGB must sit inside the dynamic label range, which starts at 18432 with the default static-label-range. 100000–100999 fits with no change and no reboot.
+
+P nodes run SR too. P1 and P2 swap the node-SID label hop by hop, so they need SR enabled and the SRGB. What they do not carry is LDP, SDPs or services: no per-service or per-LSP state in the core.
+
+SR is the transport. No LDP on the links and no RSVP. SR builds the shortest-path tunnels (show router tunnel-table, protocol isis), and the SDP binds to them with sr-isis.
+
 T-LDP only signals the service label. LDP runs on the PEs with no interfaces; the targeted session toward the SDP far-end comes up automatically and only exchanges the pseudowire (VC) label.
+
+
+
+
 
 Checkin:
 
